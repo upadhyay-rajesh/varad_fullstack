@@ -38,7 +38,7 @@ public class FacebookController {
 			}
 		
 	}
-
+//
 	public void viewProfile()throws Exception {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("please enter email to view profile");
