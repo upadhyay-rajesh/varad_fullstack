@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import com.facebookvarad2.dao.FacebookDAO;
+import com.facebookvarad2.entity.FacebookUser;
 
 public class FacebookController {
 
@@ -25,9 +26,15 @@ public class FacebookController {
 		System.out.println("enter address");
 		String address=sc.next();
 		
+		FacebookUser fuser=new FacebookUser();
+		fuser.setName(name);
+		fuser.setPassword(password);
+		fuser.setEmail(email);
+		fuser.setAddress(address);
+		
 		FacebookDAO fd=new FacebookDAO();
 		
-		int i=fd.createProfile(name, password, email, address);
+		int i=fd.createProfile(fuser);
 		
 		if(i>0) {
 			System.out.println("Hello "+name+" Your password is "+password+" email is "+email+" and address is "+address);
@@ -44,19 +51,20 @@ public class FacebookController {
 		System.out.println("please enter email to view profile");
 		
 		String email=sc.next();
+		FacebookUser fuser=new FacebookUser();
+		fuser.setEmail(email);
 		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","rajesh");
-		PreparedStatement ps=con.prepareStatement("select * from facebookvarad2 where email=?");
-		ps.setString(1, email);
+		FacebookDAO fd=new FacebookDAO();
+		FacebookUser f=fd.viewProfileDAO(fuser);
 		
-		ResultSet res= ps.executeQuery();  //to execute select query we will use executeQuery() method in jdbc and return type will be ResultSet
-		if(res.next()) {
+		
+		
+		if(f!=null) {
 			System.out.println("record found and it is below");
-			System.out.println("Name is "+res.getString(1));     //here 1 indicate first column number
-			System.out.println("Password is "+res.getString(2));
-			System.out.println("Email is "+res.getString(3));
-			System.out.println("Address is "+res.getString(4));
+			System.out.println("Name is "+f.getName());     //here 1 indicate first column number
+			System.out.println("Password is "+f.getPassword());
+			System.out.println("Email is "+f.getEmail());
+			System.out.println("Address is "+f.getAddress());
 		}
 		else {
 			System.out.println("email not found in database");
