@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.facebookvarad2.entity.FacebookUser;
 
-public class FacebookDAO {
+public class FacebookDAO implements FacebookDAOInterface{
 	
 	public int createProfile(FacebookUser f)throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -38,5 +39,59 @@ public class FacebookDAO {
 		}
 		return f1;
 	}
+	
+	
+	public ArrayList<FacebookUser> viewAllProfileDAO()throws Exception{
+		ArrayList<FacebookUser> a=new ArrayList<FacebookUser>();
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","rajesh");
+		PreparedStatement ps=con.prepareStatement("select * from facebookvarad2");
+				
+		ResultSet res= ps.executeQuery();  //to execute select query we will use executeQuery() method in jdbc and return type will be ResultSet
+		while(res.next()) {
+			FacebookUser f1=new FacebookUser();
+			f1.setName(res.getString(1));
+			f1.setPassword(res.getString(2));
+			f1.setEmail(res.getString(3));
+			f1.setAddress(res.getString(4));
+			a.add(f1);
+		}
+		
+		return a;
+	}
+	
+	public int deleteProfileDAO(FacebookUser fu)throws Exception{
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","rajesh");
+		PreparedStatement ps=con.prepareStatement("delete from facebookvarad2 where email=?");
+		
+		ps.setString(1, fu.getEmail());
+		
+		int i=ps.executeUpdate(); //to execute insert,delete,update query we will use executeUpdate() method in jdbc and return type will be int
+		return i;
+	}
 
+	public void searchProfileDAO(FacebookUser fu)throws Exception{
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

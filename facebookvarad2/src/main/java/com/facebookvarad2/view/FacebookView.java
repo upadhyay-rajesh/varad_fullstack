@@ -3,6 +3,7 @@ package com.facebookvarad2.view;
 import java.util.Scanner;
 
 import com.facebookvarad2.controller.FacebookController;
+import com.facebookvarad2.controller.FacebookControllerInterface;
 
 public class FacebookView {
 
@@ -25,7 +26,7 @@ public class FacebookView {
 
 		int choice = sc.nextInt();
 		
-		FacebookController c=new FacebookController();
+		FacebookControllerInterface c=new FacebookController();
 
 		switch (choice) {
 		case 1:

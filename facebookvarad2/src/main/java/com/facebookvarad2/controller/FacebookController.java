@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.facebookvarad2.dao.FacebookDAO;
+import com.facebookvarad2.dao.FacebookDAOInterface;
 import com.facebookvarad2.entity.FacebookUser;
 
-public class FacebookController {
+public class FacebookController implements FacebookControllerInterface{
 
 	public void createProfile()throws Exception {
 		Scanner sc=new Scanner(System.in); //Scanner class is used to take input from console
@@ -32,7 +34,7 @@ public class FacebookController {
 		fuser.setEmail(email);
 		fuser.setAddress(address);
 		
-		FacebookDAO fd=new FacebookDAO();
+		FacebookDAOInterface fd=new FacebookDAO();
 		
 		int i=fd.createProfile(fuser);
 		
@@ -54,7 +56,7 @@ public class FacebookController {
 		FacebookUser fuser=new FacebookUser();
 		fuser.setEmail(email);
 		
-		FacebookDAO fd=new FacebookDAO();
+		FacebookDAOInterface fd=new FacebookDAO();
 		FacebookUser f=fd.viewProfileDAO(fuser);
 		
 		
@@ -77,17 +79,49 @@ public class FacebookController {
 		
 	}
 
-	public void viewAllProfile() {
-		// TODO Auto-generated method stub
+	public void viewAllProfile()throws Exception {
+		FacebookDAOInterface fd=new FacebookDAO();
+		ArrayList<FacebookUser> varadbag=fd.viewAllProfileDAO();
+		
+		System.out.println(varadbag.size()+"  record found in database");
+		
+		if(varadbag.size()>0) {
+			for(FacebookUser f:varadbag) {
+			System.out.println("************************************");
+			System.out.println("Name is "+f.getName());     //here 1 indicate first column number
+			System.out.println("Password is "+f.getPassword());
+			System.out.println("Email is "+f.getEmail());
+			System.out.println("Address is "+f.getAddress());
+			}
+		}
+		else {
+			System.out.println("no profile found");
+		}
 		
 	}
 
-	public void deleteProfile() {
-		// TODO Auto-generated method stub
+	public void deleteProfile()throws Exception {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("please enter email to delete profile");
+		
+		String email=sc.next();
+		FacebookUser fuser=new FacebookUser();
+		fuser.setEmail(email);
+		
+		FacebookDAOInterface fd=new FacebookDAO();
+		int f=fd.deleteProfileDAO(fuser);
+		
+		if(f>0) {
+			
+			System.out.println("profile deleted successfully");
+			}
+			else {
+				System.out.println("could not find profile");
+			}
 		
 	}
 
-	public void searchProfile() {
+	public void searchProfile()throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
