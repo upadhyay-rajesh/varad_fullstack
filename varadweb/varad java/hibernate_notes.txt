@@ -1,0 +1,121 @@
+1. how to get hibernate for application?
+add following dependency inside pom.xml file
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.5.4.Final</version>
+</dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.5.4.Final</version>
+</dependency>
+
+2. how to configure hibernate for database?
+   download file called hibernate.cfg.xml from internet and provide database information as below
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- Version 8 MySQL hiberante-cfg.xml example for Hibernate 5 -->
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+    <property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+    <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+    <property name="connection.username">system</property>
+    <property name="connection.password">rajesh</property>
+
+    <property name="show_sql">true</property>
+    
+    <property name="format_sql">true</property>
+    
+    <property name="hbm2ddl.auto">update</property>
+    
+    <mapping class="com.facebookweb.entity.FacebookUser" />
+  </session-factory>
+</hibernate-configuration>
+
+3 & 4. which java object and how to map on table?
+
+package com.facebookweb.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="myfacebookuser")
+public class FacebookUser {
+	private String name;
+	private String password;
+	@Id
+	private String email;
+	private String address;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
+}
+
+5. how to use hibernate in application?
+   public int registerUserDAO(FacebookUser fu) {
+		int i=0;
+		/* using JDBC
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@Rev-PG02REP7:1521:xe","system","rajesh");
+			
+			PreparedStatement ps=con.prepareStatement("insert into facebookuser values(?,?,?,?)");
+			ps.setString(1, fu.getName());
+			ps.setString(2, fu.getPassword());
+			ps.setString(3, fu.getEmail());
+			ps.setString(4,fu.getAddress() );
+			i=ps.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}*/
+		//using hibernate
+		
+		//by default configure method will load hibernate.cfg.xml file
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		
+		Session ss=sf.openSession();
+		
+		EntityTransaction et=ss.getTransaction();
+		et.begin();
+		
+			ss.save(fu);
+		
+		et.commit();
+		i=1;
+		
+		return i;
+	}

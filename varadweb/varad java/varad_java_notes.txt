@@ -1,0 +1,60 @@
+what is class?
+class is group of functions and variables.
+
+what is function or method?
+method is the way to write logic of given task.
+
+what is method without return type?
+method with void.
+
+what is method with return type?
+method can return primitive data type and reference data type.
+
+how many types of data type available in java?
+there are 2 type of data types available in java
+a. primitive data type
+b. reference data type
+
+what is method with parameter?
+public FacebookUser viewProfileDAO(FacebookUser f){
+}
+
+what is use of static?
+if a class have static methods and variables then to access it we have not to create object
+of that class.
+
+how to create parent child relationship in java language?
+using extends keyword.
+
+class Childclassname extends Parentclassname
+
+final class can not be inherited i.e. it will not allow to create child class.
+if a variable is final then it will be constant means will not allow to change value.
+final method can not be overridden. means
+
+what is is overriding?
+1. overriding will happen between parent and child.
+2. if parent have a non private method then it automatically will come to child.
+   here if child also have same method then child class method will override to parent class method
+3. overriding is also known as dynamic binding or run time polymorphism.
+4. super is use to call parent class method and variables.
+
+what is overloading?
+1. overloading will happen within class.
+2. if two method have same name but different parameter then it will be called overloading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

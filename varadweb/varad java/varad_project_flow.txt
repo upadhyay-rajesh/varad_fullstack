@@ -1,0 +1,84 @@
+step 1 : create maven project using quick start
+step 2 : what we have to do
+	a. create profile
+	b. view profile
+	c. edit profile
+	d. delete profile
+	e. search profile
+	f. view all profile
+
+step 3 : now we will create skeleton for above project using low coupling means using interfacei.e. 
+	a. view layer
+		FacebookView
+			public static void main()
+				a. create profile
+				b. view profile
+				c. edit profile
+				d. delete profile
+				e. search profile
+				f. view all profile
+				
+	b. controller layer
+		FacebookControllerInterface
+			public void createProfileController();
+			public void viewProfileController();
+			public void editProfileController();
+			public void deleteProfileController();
+			public void searchProfileController();
+			public void viewAllProfileController();
+		FacebookController implements FacebookControllerInterface
+			public void createProfileController(){}
+			public void viewProfileController(){}
+			public void editProfileController(){}
+			public void deleteProfileController(){}
+			public void searchProfileController(){}
+			public void viewAllProfileController(){}
+	c. service layer
+		FacebookServiceInterface
+			public int createProfileService(FacebookUser fu);
+			public FacebookUser viewProfileService(FacebookUser fu);
+			public int editProfileService(FacebookUser fu);
+			public int deleteProfileService(FacebookUser fu);
+			public List<FacebookUser> searchProfileService(FacebookUser fu);
+			public List<FacebookUser> viewAllProfileService();
+		FacebookService implements FacebookServiceInterface
+			public int createProfileService(FacebookUser fu){}
+			public FacebookUser viewProfileService(FacebookUser fu){}
+			public int editProfileService(FacebookUser fu){}
+			public int deleteProfileService(FacebookUser fu){}
+			public List<FacebookUser> searchProfileService(FacebookUser fu){}
+			public List<FacebookUser> viewAllProfileService(){}
+	d. dao layer
+		FacebookDAOInterface
+			public int createProfileDAO(FacebookUser fu);
+			public FacebookUser viewProfileDAO(FacebookUser fu);
+			public int editProfileDAO(FacebookUser fu);
+			public int deleteProfileDAO(FacebookUser fu);
+			public List<FacebookUser> searchProfileDAO(FacebookUser fu);
+			public List<FacebookUser> viewAllProfileDAO();
+		FacebookDAO
+			public int createProfileDAO(FacebookUser fu){}
+			public FacebookUser viewProfileDAO(FacebookUser fu){}
+			public int editProfileDAO(FacebookUser fu){}
+			public int deleteProfileDAO(FacebookUser fu){}
+			public List<FacebookUser> searchProfileDAO(FacebookUser fu){}
+			public List<FacebookUser> viewAllProfileDAO(){}
+
+	e. entity
+		FacebookUser
+			private String name;
+			private String password;
+			private String email;
+			private String address;
+
+step 4 : now we have to use oracle or mysql database so how to do
+	1. add oracle dependency inside pom.xml
+	2. create table inside database as
+		create table facebookvarad3(name varchar2(23),password varchar2(23),email varchar2(23),address varchar2(23));
+	3. now we will write jdbc code inside DAO layer	
+	
+
+
+
+
+
