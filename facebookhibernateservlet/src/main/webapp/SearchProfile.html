@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script>
+	function findSearch(){
+	var v=document.getElementById("ss").value;
+	
+	if(v==="name"){
+		document.getElementById("result").innerHTML="<form action=SearchServlet method=post><input type=hidden name=hh value=name>Enter Name <input type=text name=nm><input type=submit value=search></form>";
+	}
+	if(v==="city"){
+		document.getElementById("result").innerHTML="<form action=SearchServlet method=post><input type=hidden name=hh value=Address>Enter City <input type=text name=ad><input type=submit value=search></form>";
+	}
+	}
+	
+</script>
+
+</head>
+<body>
+<p>Search Page</p>
+Search Option <select id="ss" onChange="findSearch()">
+	<option value=name>Search By Name</option>
+	<option value=city>Search By City</option>
+</select>
+<div id=result></div>
+</body>
+</html>
