@@ -1,9 +1,8 @@
 package com.facebookspringboot.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.Id;
 
-@Entity
+@javax.persistence.Entity
 public class FacebookUser {
 	private String name;
 	private String  password;
