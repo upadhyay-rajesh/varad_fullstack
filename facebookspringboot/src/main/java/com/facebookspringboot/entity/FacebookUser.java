@@ -8,6 +8,7 @@ public class FacebookUser {
 	private String  password;
 	@Id
 	private String email;
+	
 	private String address;
 	public String getName() {
 		return name;
