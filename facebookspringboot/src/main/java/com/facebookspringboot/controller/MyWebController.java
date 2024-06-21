@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MyWebController {
 	
 	
-	@RequestMapping(value="createProfile.htm" , produces = MediaType.APPLICATION_JSON)
+	@RequestMapping(value="createProfile.htm" )
 	public ModelAndView createProfile(@RequestParam("name") String name) {
 		
 		
